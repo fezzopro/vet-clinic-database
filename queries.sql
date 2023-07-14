@@ -35,3 +35,21 @@ SELECT *
 	FROM animals
 	WHERE weight_kg >= '10.4'
 	AND weight_kg <= '17.3';
+
+BEGIN TRANSACTION;
+	UPDATE animals SET species= 'unspecified';
+	SELECT * FROM animals;
+ROLLBACK TRANSACTION;
+	SELECT * FROM animals;
+
+BEGIN TRANSACTION;
+	UPDATE animals SET species= 'digimon' WHERE TRIM(name) like '%mon';
+	UPDATE animals SET species= 'pokemon' WHERE species IS NULL;
+	SELECT * FROM animals;
+ROLLBACK TRANSACTION;
+SELECT * FROM animals;
+
+BEGIN TRANSACTION;
+	DELETE FROM animals;
+ROLLBACK TRANSACTION;
+SELECT * FROM animals;

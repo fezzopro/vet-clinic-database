@@ -75,3 +75,13 @@ INSERT INTO vets(name, age, date_of_graduation)
 	('Jack Harkness', 38, '2008-01-08');
 COMMIT TRANSACTION;
 SELECT * FROM vets;
+
+-- INSERT DATA INTO specializations
+BEGIN TRANSACTION;
+INSERT INTO specializations(vet_id, species_id) 
+	VALUES ((SELECT id FROM vets WHERE name = 'William Tatcher'), (SELECT id FROM species WHERE name = 'Pokemon')),
+	((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM species WHERE name = 'Digimon')),
+	((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM species WHERE name = 'Pokemon')),
+	((SELECT id FROM vets WHERE name = 'Jack Harkness'), (SELECT id FROM species WHERE name = 'Digimon'));
+COMMIT TRANSACTION;
+SELECT * FROM specializations;

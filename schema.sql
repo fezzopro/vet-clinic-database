@@ -73,3 +73,11 @@ ALTER TABLE IF EXISTS animals DROP COLUMN IF EXISTS species;
 -- ADD species_id COLUMN TO animals TABLE
 ALTER TABLE IF EXISTS animals
     ADD COLUMN IF NOT EXISTS species_id integer;
+
+-- ADD species_foreign_key AS FOREIGN KEY TO species TABLE
+ALTER TABLE IF EXISTS animals
+    ADD CONSTRAINT species_foreign_key FOREIGN KEY (species_id)
+    REFERENCES species (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;

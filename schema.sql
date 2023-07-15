@@ -34,3 +34,6 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS animals
     OWNER to postgres;
+
+ALTER TABLE IF EXISTS public.animals
+    ADD COLUMN IF NOT EXISTS species character(20);

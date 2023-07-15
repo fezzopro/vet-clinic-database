@@ -91,3 +91,76 @@ ALTER TABLE IF EXISTS animals
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+
+-- CREATE TABLE vets
+CREATE TABLE IF NOT EXISTS vets
+(
+    id serial NOT NULL,
+    name character(50) NOT NULL,
+    age integer,
+    date_of_graduation date,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS vets
+    OWNER to postgres;
+
+-- CREATE TABLE specializations
+-- ADD CONSTRAINT AND (vet_id, species_id) AS UNIQUE KEY
+CREATE TABLE specializations
+(
+    id serial NOT NULL,
+    vet_id integer NOT NULL,
+    species_id integer NOT NULL,
+    CONSTRAINT "specializations_PK" PRIMARY KEY (id),
+    CONSTRAINT "vet_FK" FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT "species_FK" FOREIGN KEY (species_id)
+        REFERENCES species (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+WITH (
+    OIDS = FALSE
+);
+ALTER TABLE IF EXISTS specializations
+    ADD CONSTRAINT "specializations_UQ" UNIQUE (vet_id, species_id);
+
+ALTER TABLE IF EXISTS specializations
+    OWNER to postgres;
+
+-- CREATE TABLE visits
+-- ADD CONSTRAINT AND (vet_id, animal_id) AS UNIQUE KEY
+CREATE TABLE visits
+(
+    id serial NOT NULL,
+    vet_id integer NOT NULL,
+    animal_id integer NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    FOREIGN KEY (animal_id)
+        REFERENCES animals (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS visits
+    OWNER to postgres;
+-- ALTER TABLE TO ADD VISIT DATE
+ALTER TABLE IF EXISTS visits
+    ADD COLUMN IF NOT EXISTS visit_date date;

@@ -69,3 +69,7 @@ ALTER TABLE IF EXISTS species
 
 -- REMOVE species COLUMN FROM animals TABLE
 ALTER TABLE IF EXISTS animals DROP COLUMN IF EXISTS species;
+
+-- ADD species_id COLUMN TO animals TABLE
+ALTER TABLE IF EXISTS animals
+    ADD COLUMN IF NOT EXISTS species_id integer;

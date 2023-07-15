@@ -144,7 +144,6 @@ CREATE TABLE visits
     vet_id integer NOT NULL,
     animal_id integer NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE (vet_id, animal_id),
     FOREIGN KEY (vet_id)
         REFERENCES vets (id) MATCH SIMPLE
         ON UPDATE NO ACTION

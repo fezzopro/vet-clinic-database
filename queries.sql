@@ -65,3 +65,8 @@ ROLLBACK TO SAVEPOINT my_savepoint;
 	WHERE weight_kg < 0;
 COMMIT;
 SELECT * FROM animals;
+
+-- ANALYTICAL QUESTIONS
+-- HOW MANY ANIMALS ARE THERE
+SELECT COUNT(name) as animals_quantity FROM animals;
+

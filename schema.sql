@@ -81,3 +81,13 @@ ALTER TABLE IF EXISTS animals
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+
+-- ADD owners_foreign_key AS FOREIGN KEY TO owners TABLE
+ALTER TABLE IF EXISTS animals
+    ADD COLUMN IF NOT EXISTS owner_id integer;
+ALTER TABLE IF EXISTS animals
+    ADD CONSTRAINT owners_foreign_key FOREIGN KEY (owner_id)
+    REFERENCES owners (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;

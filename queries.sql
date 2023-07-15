@@ -46,11 +46,12 @@ BEGIN TRANSACTION;
 	UPDATE animals SET species= 'digimon' WHERE TRIM(name) like '%mon';
 	UPDATE animals SET species= 'pokemon' WHERE species IS NULL;
 	SELECT * FROM animals;
-ROLLBACK TRANSACTION;
+COMMIT;
 SELECT * FROM animals;
 
 BEGIN TRANSACTION;
 	DELETE FROM animals;
+	SELECT * FROM animals;
 ROLLBACK TRANSACTION;
 SELECT * FROM animals;
 

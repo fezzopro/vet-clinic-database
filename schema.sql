@@ -91,3 +91,19 @@ ALTER TABLE IF EXISTS animals
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+
+-- CREATE TABLE vets
+CREATE TABLE IF NOT EXISTS vets
+(
+    id serial NOT NULL,
+    name character(50) NOT NULL,
+    age integer,
+    date_of_graduation date,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS vets
+    OWNER to postgres;

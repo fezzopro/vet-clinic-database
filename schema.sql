@@ -66,3 +66,6 @@ WITH (
 
 ALTER TABLE IF EXISTS species
     OWNER to postgres;
+
+-- REMOVE species COLUMN FROM animals TABLE
+ALTER TABLE IF EXISTS animals DROP COLUMN IF EXISTS species;

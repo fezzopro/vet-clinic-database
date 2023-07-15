@@ -112,3 +112,9 @@ SELECT full_name as owner, name as animal
 	FROM animals
 	RIGHT JOIN owners
 	ON animals.owner_id = owners.id;
+
+-- HOW MANY ANIMALS ARE THERE IN PER SPECIES?
+SELECT s.name AS species_name, COUNT(*) AS animal_count
+	FROM animals a
+	JOIN species s ON a.species_id = s.id
+	GROUP BY s.name;

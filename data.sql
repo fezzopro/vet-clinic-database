@@ -21,3 +21,14 @@ INSERT INTO public.animals(
 	('Ditto', '2022-05-14', 4, 'true', '22');
 
 COMMIT TRANSACTION;
+
+BEGIN TRANSACTION;
+INSERT INTO owners(full_name, age) 
+	VALUES ('Sam Smith', 34),
+	('Jennifer Orwell', 19),
+	('Bob', 45),
+	('Melody Pond', 77),
+	('Dean Winchester', 14),
+	('Jodie Whittaker', 38);
+COMMIT TRANSACTION
+SELECT * FROM owners;

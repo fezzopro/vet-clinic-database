@@ -19,7 +19,7 @@ CREATE DATABASE vet_clinic
 
 CREATE TABLE IF NOT EXISTS animals
 (
-    id integer NOT NULL DEFAULT nextval('animals_id_seq'::regclass),
+    id serial NOT NULL,
     name character(100) COLLATE pg_catalog."default" NOT NULL,
     date_of_birth date,
     escape_attempts integer,
@@ -37,3 +37,18 @@ ALTER TABLE IF EXISTS animals
 
 ALTER TABLE IF EXISTS public.animals
     ADD COLUMN IF NOT EXISTS species character(20);
+
+-- CREATE TABLE owners
+CREATE TABLE IF NOT EXISTS owners
+(
+    id serial NOT NULL,
+    full_name character(50) NOT NULL,
+    age integer,
+    CONSTRAINT owners_primary_key PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS owners
+    OWNER to postgres;

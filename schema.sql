@@ -162,3 +162,6 @@ WITH (
 
 ALTER TABLE IF EXISTS visits
     OWNER to postgres;
+-- ALTER TABLE TO ADD VISIT DATE
+ALTER TABLE IF EXISTS visits
+    ADD COLUMN IF NOT EXISTS visit_date date;

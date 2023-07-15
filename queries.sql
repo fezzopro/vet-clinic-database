@@ -107,3 +107,8 @@ SELECT animals.name as animal, species.name as species
 	ON animals.species_id = species.id
 	WHERE species.name = 'Pokemon';
 
+-- LIST ALL OWNERS AND THEIR ANIMALS, REMEMBER TO INCLUDE THOSE THAT DON'T OWN ANY ANIMAL
+SELECT full_name as owner, name as animal
+	FROM animals
+	RIGHT JOIN owners
+	ON animals.owner_id = owners.id;

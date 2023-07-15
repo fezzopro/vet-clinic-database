@@ -203,3 +203,14 @@ SELECT COUNT(*)
 	JOIN animals ON visits.animal_id = animals.id
 	LEFT JOIN specializations spec ON vets.id = spec.vet_id AND animals.species_id = spec.species_id
 WHERE spec.vet_id IS NULL;
+
+-- WHAT SPECIALTY SHOULD MAISY SMITH CONSIDER GETTING? LOOK FOR THE SPECIES SHE GETS THE MOST.
+SELECT species.name AS specialty, COUNT(*) AS visit_count 
+	FROM visits 
+	JOIN vets ON visits.vet_id = vets.id 
+	JOIN animals ON visits.animal_id = animals.id 
+	JOIN species ON animals.species_id = species.id 
+	WHERE vets.name = 'Maisy Smith' 
+	GROUP BY species.name 
+	ORDER BY visit_count DESC 
+LIMIT 1;

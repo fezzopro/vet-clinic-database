@@ -92,3 +92,10 @@ SELECT species, AVG(escape_attempts) AS AVG_escape_attempts
 	FROM animals
 	WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31'
 	GROUP BY species;
+
+-- What animals belong to Melody Pond?
+SELECT full_name as owner, name as animal
+	FROM animals
+	INNER JOIN owners 
+	ON animals.owner_id = owners.id
+	WHERE owners.id = 4;

@@ -92,3 +92,11 @@ SELECT species, AVG(escape_attempts) AS AVG_escape_attempts
 	FROM animals
 	WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31'
 	GROUP BY species;
+
+-- UPDATE animals species_id when name doesn't end with mon
+BEGIN TRANSACTION;
+UPDATE animals
+	SET species_id = 1
+	WHERE TRIM(name) NOT LIKE '%mon';
+COMMIT TRANSACTION;
+SELECT * FROM animals;

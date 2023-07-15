@@ -100,3 +100,11 @@ UPDATE animals
 	WHERE TRIM(name) NOT LIKE '%mon';
 COMMIT TRANSACTION;
 SELECT * FROM animals;
+
+-- UPDATE animals species_id when name ends with mon
+BEGIN TRANSACTION;
+UPDATE animals
+	SET species_id = 2
+	WHERE TRIM(name) LIKE '%mon';
+COMMIT TRANSACTION;
+SELECT * FROM animals;

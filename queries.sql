@@ -76,3 +76,7 @@ SELECT COUNT(name) as never_attempted FROM animals WHERE escape_attempts = 0;
 -- WHAT IS THE AVERAGE WEIGHT OF ANIMALS
 SELECT AVG(weight_kg) as average_weight FROM animals;
 
+-- WHO ESCAPED THE MOST, NEUTERED OR NOT NEUTERED ANIMALS
+SELECT neutered, MAX(escape_attempts) AS maximum_attempts
+	FROM animals
+	GROUP BY neutered;

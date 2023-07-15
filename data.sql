@@ -65,3 +65,13 @@ UPDATE animals SET owner_id = 4 WHERE name = 'Charmander' OR name = 'Squirtle' O
 UPDATE animals SET owner_id = 5 WHERE name = 'Angemon' OR name = 'Boarmon';
 COMMIT TRANSACTION;
 SELECT * FROM animals;
+
+-- INSERT DATA INTO vets
+BEGIN TRANSACTION;
+INSERT INTO vets(name, age, date_of_graduation) 
+	VALUES ('William Tatcher', 45, '2000-04-23'),
+	('Maisy Smith', 26, '2019-01-17'),
+	('Stephanie Mendez', 64, '1981-05-04'),
+	('Jack Harkness', 38, '2008-01-08');
+COMMIT TRANSACTION;
+SELECT * FROM vets;

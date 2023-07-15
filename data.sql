@@ -21,3 +21,47 @@ INSERT INTO public.animals(
 	('Ditto', '2022-05-14', 4, 'true', '22');
 
 COMMIT TRANSACTION;
+
+BEGIN TRANSACTION;
+INSERT INTO owners(full_name, age) 
+	VALUES ('Sam Smith', 34),
+	('Jennifer Orwell', 19),
+	('Bob', 45),
+	('Melody Pond', 77),
+	('Dean Winchester', 14),
+	('Jodie Whittaker', 38);
+COMMIT TRANSACTION
+SELECT * FROM owners;
+
+BEGIN TRANSACTION;
+INSERT INTO species(name)  
+	VALUES ('Pokemon'),
+	('Digimon');
+COMMIT TRANSACTION;
+SELECT * FROM species;
+
+-- UPDATE animals species_id when name doesn't end with mon
+BEGIN TRANSACTION;
+UPDATE animals
+	SET species_id = 1
+	WHERE TRIM(name) NOT LIKE '%mon';
+COMMIT TRANSACTION;
+SELECT * FROM animals;
+
+-- UPDATE animals species_id when name ends with mon
+BEGIN TRANSACTION;
+UPDATE animals
+	SET species_id = 2
+	WHERE TRIM(name) LIKE '%mon';
+COMMIT TRANSACTION;
+SELECT * FROM animals;
+
+-- UPDATE animals TABLE TO ADD OWNERS ID
+BEGIN TRANSACTION;
+UPDATE animals SET owner_id = 1 WHERE name = 'Agumon';
+UPDATE animals SET owner_id = 2 WHERE name = 'Pikachu' OR name = 'Gabumon';
+UPDATE animals SET owner_id = 3 WHERE name = 'Devimon' OR name = 'Plantmon';
+UPDATE animals SET owner_id = 4 WHERE name = 'Charmander' OR name = 'Squirtle' OR name = 'Blossom';
+UPDATE animals SET owner_id = 5 WHERE name = 'Angemon' OR name = 'Boarmon';
+COMMIT TRANSACTION;
+SELECT * FROM animals;

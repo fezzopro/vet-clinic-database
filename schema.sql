@@ -19,7 +19,7 @@ CREATE DATABASE vet_clinic
 
 CREATE TABLE IF NOT EXISTS animals
 (
-    id integer NOT NULL DEFAULT nextval('animals_id_seq'::regclass),
+    id serial NOT NULL,
     name character(100) COLLATE pg_catalog."default" NOT NULL,
     date_of_birth date,
     escape_attempts integer,
@@ -37,3 +37,57 @@ ALTER TABLE IF EXISTS animals
 
 ALTER TABLE IF EXISTS public.animals
     ADD COLUMN IF NOT EXISTS species character(20);
+
+-- CREATE TABLE owners
+CREATE TABLE IF NOT EXISTS owners
+(
+    id serial NOT NULL,
+    full_name character(50) NOT NULL,
+    age integer,
+    CONSTRAINT owners_primary_key PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS owners
+    OWNER to postgres;
+
+-- CREATE TABLE species
+CREATE TABLE IF NOT EXISTS species
+(
+    id serial NOT NULL,
+    name character(50) NOT NULL,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS species
+    OWNER to postgres;
+
+-- REMOVE species COLUMN FROM animals TABLE
+ALTER TABLE IF EXISTS animals DROP COLUMN IF EXISTS species;
+
+-- ADD species_id COLUMN TO animals TABLE
+ALTER TABLE IF EXISTS animals
+    ADD COLUMN IF NOT EXISTS species_id integer;
+
+-- ADD species_foreign_key AS FOREIGN KEY TO species TABLE
+ALTER TABLE IF EXISTS animals
+    ADD CONSTRAINT species_foreign_key FOREIGN KEY (species_id)
+    REFERENCES species (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+-- ADD owners_foreign_key AS FOREIGN KEY TO owners TABLE
+ALTER TABLE IF EXISTS animals
+    ADD COLUMN IF NOT EXISTS owner_id integer;
+ALTER TABLE IF EXISTS animals
+    ADD CONSTRAINT owners_foreign_key FOREIGN KEY (owner_id)
+    REFERENCES owners (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;

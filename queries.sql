@@ -70,3 +70,5 @@ SELECT * FROM animals;
 -- HOW MANY ANIMALS ARE THERE
 SELECT COUNT(name) as animals_quantity FROM animals;
 
+-- HOW MANY ANIMALS HAVE NEVER TRIED TO ESCAPE?
+SELECT COUNT(name) as never_attempted FROM animals WHERE escape_attempts = 0;

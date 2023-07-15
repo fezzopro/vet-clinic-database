@@ -98,4 +98,12 @@ SELECT full_name as owner, name as animal
 	FROM animals
 	INNER JOIN owners 
 	ON animals.owner_id = owners.id
-	WHERE owners.id = 4;
+	WHERE owners.full_name = 'Melody Pond';
+
+-- LIST ALL ANIMALS THAT ARE POKEMON (THEIR TYPE IS POKEMON)
+SELECT animals.name as animal, species.name as species
+	FROM animals
+	INNER JOIN species  
+	ON animals.species_id = species.id
+	WHERE species.name = 'Pokemon';
+

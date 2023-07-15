@@ -32,3 +32,10 @@ INSERT INTO owners(full_name, age)
 	('Jodie Whittaker', 38);
 COMMIT TRANSACTION
 SELECT * FROM owners;
+
+BEGIN TRANSACTION;
+INSERT INTO species(name)  
+	VALUES ('Pokemon'),
+	('Digimon');
+COMMIT TRANSACTION;
+SELECT * FROM species;

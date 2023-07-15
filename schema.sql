@@ -135,3 +135,30 @@ ALTER TABLE IF EXISTS specializations
 
 ALTER TABLE IF EXISTS specializations
     OWNER to postgres;
+
+-- CREATE TABLE visits
+-- ADD CONSTRAINT AND (vet_id, animal_id) AS UNIQUE KEY
+CREATE TABLE visits
+(
+    id serial NOT NULL,
+    vet_id integer NOT NULL,
+    animal_id integer NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (vet_id, animal_id),
+    FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    FOREIGN KEY (animal_id)
+        REFERENCES animals (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS visits
+    OWNER to postgres;

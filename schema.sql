@@ -107,3 +107,31 @@ WITH (
 
 ALTER TABLE IF EXISTS vets
     OWNER to postgres;
+
+-- CREATE TABLE specializations
+-- ADD CONSTRAINT AND (vet_id, species_id) AS UNIQUE KEY
+CREATE TABLE specializations
+(
+    id serial NOT NULL,
+    vet_id integer NOT NULL,
+    species_id integer NOT NULL,
+    CONSTRAINT "specializations_PK" PRIMARY KEY (id),
+    CONSTRAINT "vet_FK" FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT "species_FK" FOREIGN KEY (species_id)
+        REFERENCES species (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+WITH (
+    OIDS = FALSE
+);
+ALTER TABLE IF EXISTS specializations
+    ADD CONSTRAINT "specializations_UQ" UNIQUE (vet_id, species_id);
+
+ALTER TABLE IF EXISTS specializations
+    OWNER to postgres;

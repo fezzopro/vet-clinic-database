@@ -52,3 +52,17 @@ WITH (
 
 ALTER TABLE IF EXISTS owners
     OWNER to postgres;
+
+-- CREATE TABLE species
+CREATE TABLE IF NOT EXISTS species
+(
+    id serial NOT NULL,
+    name character(50) NOT NULL,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE IF EXISTS species
+    OWNER to postgres;

@@ -98,7 +98,7 @@ No tests here...
 
 ### Author:
 
-👤 **Salim Bamahfoodh**
+👤 **Felix KAMANA**
 
 - GitHub: [@githubhandle](https://github.com/fezzopro)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/kamana-felix/)
